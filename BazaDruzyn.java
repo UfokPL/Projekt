@@ -15,11 +15,11 @@ public class BazaDruzyn {
     public static Vector<Team> druzyny;
     public BazaDruzyn()
     {
-        druzyny = null;
-    }
+        this.druzyny = new Vector<Team>() ;
+    };
     public void dodaj_zespol(Team druzyna)
     {
-        this.druzyny.add(druzyna);
+        druzyny.add(druzyna);
     }
     
     public void wyswietl_zespoly()

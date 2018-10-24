@@ -26,11 +26,9 @@ public class Team {
         
     };
     
-    public void dodaj_zespol(Vector<Team> druzyny, Team druzyna)
-    {
-        druzyny.add(druzyna);
+    public void wyswietl_dane_zespolu(){
+        System.out.println(getNazwa());
     }
-          
     public String getNazwa() {
         return nazwa;
     }

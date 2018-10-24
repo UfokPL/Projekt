@@ -101,10 +101,18 @@ public class Zapisy extends javax.swing.JFrame {
         
         int yesOrNo = JOptionPane.showConfirmDialog (null, "Pamiętaj o kartce i długopisie.\nPobierz opłatę"+" "+5*Integer.parseInt(ilos.getText()) + "zł.\nCzy chcesz dodać kolejną drużynę?", null,
                 JOptionPane.YES_NO_OPTION);     
+        System.out.println(yesOrNo);    
+        if(yesOrNo==0){
+            nazwa.setText("");
+            ilos.setText("");
+        }
+        else
+            dispose();
+        BazaDruzyn.druzyny.add(new Team("druzyna", 12));
+        for(Team druzyna : BazaDruzyn.druzyny)
+           druzyna.wyswietl_dane_zespolu();
+        
             
-            BazaDruzyn druzyny = new BazaDruzyn();
-            Team druzyna = new Team(nazwa.getText(), Integer.parseInt(ilos.getText()));
-            druzyny.dodaj_zespol(druzyna);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
