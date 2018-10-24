@@ -1,12 +1,11 @@
 # Projekt ma na celu zoptymalizować pracę prowadzących PubQuiz na terenie całej Polski
-# WinApi
+# JAVA
 
 Założenia:
-1. Aplikacja ma współpracować ze skryptem tabeli. 
+1. Aplikacja pisana od podstaw w Javie. 
 2. Prowadzący będzie mógł wpisać w oknie w jednym z pól tekstowych nazwę drużyny i ilość osób, poniżej aplikacja sama wyliczy ile dana drużyna ma zapłacić za wstęp i przypomnieć prowadzącemu o wydaniu drużynie kart odpowiedzi i długopisu/-ów.
-3. Dane napisane w polach będą importowane do poszczególnych pól w tabeli wyników, która będzie otwarta w osobnym oknie i wypełniana na bieżąco przez aplikację.
-4. Po zakończeniu zapisów można kliknąć przycisk "zakończ zapisy", wtedy pojawia się okno/otwiera się zakładka wpisywania wyników dla drużyn - wystarczy zaznaczyć która runda się zakończyła i ile punktów uzyskała dana drużyna (kolejno po kategoriach), łącznie z odpowiedziami drużyn na pyt. dogrywkowe i jej prawidłową odpowiedzią.
-5. W razie potrzeby, korekt można dokonywać na otwartym obok skrypcie tabeli. 
+3. Dane napisane w polach będą importowane do tabeli, która pojawi się w osobnym oknie po przyciśnięciu przycisku "rozpocznij quiz".
+4. Po zakończeniu zapisów można kliknąć przycisk "rozpocznij quiz", wtedy pojawia się okno wpisywania wyników dla drużyn - wystarczy zaznaczyć która runda się zakończyła i ile punktów uzyskała dana drużyna (kolejno po kategoriach), łącznie z odpowiedziami drużyn na pyt. dogrywkowe i jej prawidłową odpowiedzią. 
 6. Po wpisaniu wszystkich danych można kliknąć przycisk "zakończ quiz".
 
 Koniec aplikacji podstawowej.
