@@ -30,4 +30,15 @@ public class BazaDruzyn {
         }
     }
     
+    public boolean przeszukaj(Team szukanyZespol)
+    {
+        
+        for(Team team : this.druzyny)
+        {
+            if(szukanyZespol.getNazwa()==team.getNazwa())
+                return true;
+        }
+        return false;
+    }
+    
 }

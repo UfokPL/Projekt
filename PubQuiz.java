@@ -18,7 +18,7 @@ public class PubQuiz {
      */
     public static void main(String[] args) {
        BazaDruzyn baza = new BazaDruzyn();
-       menu pubQuiz= new menu();
+       Menu pubQuiz= new Menu();
        pubQuiz.setVisible(true);// TODO code application logic here
     }
     

@@ -5,26 +5,56 @@
  */
 package pubquiz;
 
-import java.util.Vector;
-
 /**
  *
  * @author Piotr
  */
 public class Team {
+    private final int katSize = 9;
+
+   
     private String nazwa;
     private int ilosc;
     private int punkty;
-    private boolean dogrywka;
+    private int odpDogrywka;
+    private int[] kat;
+    private int podium;
     
     public Team(String nazwa, int ilosc)
     {
+        this.kat = new int[katSize];
         this.nazwa = nazwa;
         this.ilosc = ilosc;
         this.punkty = 0;
-        this.dogrywka = false;
+        this.odpDogrywka = 0;
+        this.podium = -1;
         
     };
+
+    public void setOdpDogrywka(int odpDogrywka) {
+        this.odpDogrywka = odpDogrywka;
+    }
+
+    public int getOdpDogrywka() {
+        return odpDogrywka;
+    }
+
+     public int getKatSize() {
+        return katSize;
+    }
+    
+    public void setKat(int[] kat) {
+        this.kat = kat;
+    }
+    
+    public void setKatElement(int index, int value)
+    {
+        this.kat[index] = value;
+    }
+
+    public int[] getKat() {
+        return kat;
+    }
     
     public void wyswietl_dane_zespolu(){
         System.out.println(getNazwa());
@@ -41,9 +71,6 @@ public class Team {
         return punkty;
     }
 
-    public boolean isDogrywka() {
-        return dogrywka;
-    }
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
@@ -53,12 +80,20 @@ public class Team {
         this.ilosc = ilosc;
     }
 
-    public void setPunkty(int punkty) {
-        this.punkty = punkty;
+    public void setPunkty() {
+        for(int i=0;i<getKatSize();i++)
+            this.punkty+=getKat()[i];
+    }
+    
+    public void setPunkty(int value) {
+        this.punkty = value;
     }
 
-    public void setDogrywka(boolean dogrywka) {
-        this.dogrywka = dogrywka;
+    
+    public boolean isEqual(String name){
+        if (name==this.nazwa)
+            return true;
+        return false;
     }
     
 }

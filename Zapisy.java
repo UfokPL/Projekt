@@ -18,6 +18,7 @@ public class Zapisy extends javax.swing.JFrame {
      */
     public Zapisy() {
         initComponents();
+       
     }
 
     /**
@@ -33,10 +34,10 @@ public class Zapisy extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         nazwa = new javax.swing.JTextField();
-        ilos = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        ilos = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nazwa drużyny:");
 
@@ -52,36 +53,43 @@ public class Zapisy extends javax.swing.JFrame {
             }
         });
 
+        ilos.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        ilos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ilosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(56, 56, 56)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(ilos, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                                .addComponent(nazwa)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(135, 135, 135)
-                            .addComponent(jLabel3)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nazwa, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(ilos))
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(149, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nazwa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -89,7 +97,7 @@ public class Zapisy extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ilos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(42, 42, 42)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -98,27 +106,72 @@ public class Zapisy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        int yesOrNo = JOptionPane.showConfirmDialog (null, "Pamiętaj o kartce i długopisie.\nPobierz opłatę"+" "+5*Integer.parseInt(ilos.getText()) + "zł.\nCzy chcesz dodać kolejną drużynę?", null,
-                JOptionPane.YES_NO_OPTION);     
-        System.out.println(yesOrNo);    
-        if(yesOrNo==0){
-            nazwa.setText("");
-            ilos.setText("");
+    
+        boolean exist = false;
+        if(nazwa.getText()==null || nazwa.getText().trim().isEmpty()||ilos.getText()==null || ilos.getText().trim().isEmpty()){
+                       JOptionPane.showMessageDialog(null, "Uzupełnij dane!", "Bląd wprowadzania danych", JOptionPane.ERROR_MESSAGE);
+                       ilos.setText("");
+                        
         }
-        else
-            dispose();
-        BazaDruzyn.druzyny.add(new Team("druzyna", 12));
-        for(Team druzyna : BazaDruzyn.druzyny)
-           druzyna.wyswietl_dane_zespolu();
+        else 
+        {  
+            try{
+                if(Integer.parseInt(ilos.getText())>0)
+                {
+                    if(!BazaDruzyn.druzyny.isEmpty())
+                    {
+                      for(Team team : BazaDruzyn.druzyny)
+                        if(nazwa.getText().equals(team.getNazwa()))
+                        {
+                            exist = true;
+                            JOptionPane.showMessageDialog(null, "Druzyna o nazwie \""+nazwa.getText()+"\" już istnieje!");
+                            break;
+                        }
+                        if(!exist)
+                        {
+                            BazaDruzyn.druzyny.add(new Team(nazwa.getText(),Integer.parseInt(ilos.getText())));
+                            yesOrNo();
+                        } 
+                      
+                    } 
+                    else
+                    {
+                        BazaDruzyn.druzyny.add(new Team(nazwa.getText(),Integer.parseInt(ilos.getText()))); 
+                        yesOrNo();
+                    }
+                }
+                else 
+                    JOptionPane.showMessageDialog(null, "Ilosc osób musi być liczbą większą od zera!", "Bląd wprowadzania danych", JOptionPane.ERROR_MESSAGE);
+            }catch(NumberFormatException e){
+                 JOptionPane.showMessageDialog(null, "Ilosc osób musi być liczbą!", "Bląd wprowadzania danych", JOptionPane.ERROR_MESSAGE);
+                 ilos.setText("");
+                }
+        } 
         
-            
+      
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
+    private void ilosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ilosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ilosActionPerformed
+
+    void yesOrNo()
+    {
+        int yesOrNo = JOptionPane.showConfirmDialog (null, "Pamiętaj o kartce i długopisie.\nPobierz opłatę"+" "+5*Integer.parseInt(ilos.getText()) + "zł.\nCzy chcesz dodać kolejną drużynę?", null,
+                            JOptionPane.YES_NO_OPTION);    
+         
+        if(yesOrNo==0)
+         {
+              dispose();
+              new Zapisy().setVisible(true);
+         }
+         else
+              dispose();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ilos;
+    private javax.swing.JFormattedTextField ilos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
