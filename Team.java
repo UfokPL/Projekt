@@ -19,8 +19,10 @@ public class Team {
     private int odpDogrywka;
     private int[] kat;
     private int podium;
-    
-    public Team(String nazwa, int ilosc)
+    private boolean isRanked;
+
+       
+    public Team(String nazwa, int ilosc, boolean isRanked)
     {
         this.kat = new int[katSize];
         this.nazwa = nazwa;
@@ -28,13 +30,30 @@ public class Team {
         this.punkty = 0;
         this.odpDogrywka = 0;
         this.podium = -1;
+        this.isRanked = isRanked;
         
     };
 
     public void setOdpDogrywka(int odpDogrywka) {
         this.odpDogrywka = odpDogrywka;
     }
+    
+    public void setPodium(int podium) {
+        this.podium = podium;
+    }
 
+    public void setIsRanked(boolean isRanked) {
+        this.isRanked = isRanked;
+    }
+
+    public int getPodium() {
+        return podium;
+    }
+
+    public boolean isIsRanked() {
+        return isRanked;
+    }
+ 
     public int getOdpDogrywka() {
         return odpDogrywka;
     }
@@ -42,7 +61,7 @@ public class Team {
      public int getKatSize() {
         return katSize;
     }
-    
+     
     public void setKat(int[] kat) {
         this.kat = kat;
     }

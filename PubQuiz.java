@@ -5,7 +5,6 @@
  */
 package pubquiz;
 
-import javax.swing.*;
 
 /**
  *
@@ -17,6 +16,7 @@ public class PubQuiz {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+     
        BazaDruzyn baza = new BazaDruzyn();
        Menu pubQuiz= new Menu();
        pubQuiz.setVisible(true);// TODO code application logic here
